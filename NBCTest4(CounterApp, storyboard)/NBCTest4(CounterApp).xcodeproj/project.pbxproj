@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1712C9D52CE3487900AB0922 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1712C9D42CE3487900AB0922 /* SnapKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		173B7D2F2CE33DE6005F182B /* NBCTest4(CounterApp, storyboard).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NBCTest4(CounterApp, storyboard).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1712C9D52CE3487900AB0922 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = "NBCTest4(CounterApp, storyboard)";
 			packageProductDependencies = (
+				1712C9D42CE3487900AB0922 /* SnapKit */,
 			);
 			productName = "NBCTest4(CounterApp, storyboard)";
 			productReference = 173B7D2F2CE33DE6005F182B /* NBCTest4(CounterApp, storyboard).app */;
@@ -98,7 +104,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 173B7D2A2CE33DE6005F182B /* Build configuration list for PBXProject "NBCTest4(CounterApp, storyboard)" */;
+			buildConfigurationList = 173B7D2A2CE33DE6005F182B /* Build configuration list for PBXProject "NBCTest4(CounterApp)" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 173B7D262CE33DE6005F182B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				1712C9D32CE3487900AB0922 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 173B7D302CE33DE6005F182B /* Products */;
 			projectDirPath = "";
@@ -149,7 +158,6 @@
 				INFOPLIST_FILE = "NBCTest4(CounterApp, storyboard)/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -176,7 +184,6 @@
 				INFOPLIST_FILE = "NBCTest4(CounterApp, storyboard)/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -314,7 +321,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		173B7D2A2CE33DE6005F182B /* Build configuration list for PBXProject "NBCTest4(CounterApp, storyboard)" */ = {
+		173B7D2A2CE33DE6005F182B /* Build configuration list for PBXProject "NBCTest4(CounterApp)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				173B7D452CE33DEA005F182B /* Debug */,
@@ -333,6 +340,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1712C9D32CE3487900AB0922 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1712C9D42CE3487900AB0922 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1712C9D32CE3487900AB0922 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 173B7D272CE33DE6005F182B /* Project object */;
 }
