@@ -6,18 +6,59 @@
 //
 
 import UIKit
+import SnapKit
 
-class TableViewCell: UITableViewCell {
+final class TableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    static let id = "TableViewCell"
+    
+    private let dtTxtLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .black
+        label.textColor = .white
+        return label
+    }()
+
+    private let tempLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .black
+        label.textColor = .white
+        return label
+    }()
+    
+    // TableView 의 style 과 id 로 초기화를 할 때 사용하는 코드
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configureUI()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    // 인터페이스 빌더를 통해 셀을 초기화 할 때 사용하는 코드
+    // 여기서는 fatalError 를 통해서 명시적으로 인터페이스 빌더로 초기화 하지 않음을 나타냄
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-
+ 
+    private func configureUI() {
+        contentView.backgroundColor = .black
+        [
+            dtTxtLabel,
+            tempLabel
+        ].forEach { contentView.addSubview($0) }
+        
+        dtTxtLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(20)
+        }
+        
+        tempLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(20)
+        }
+    }
+    
+    public func configureCell(forecastWeather: ForecastWeather) {
+        dtTxtLabel.text = "\(forecastWeather.dtTxt)°C"
+        tempLabel.text = "\(forecastWeather.main.temp)°C"
+        
+    }
 }
