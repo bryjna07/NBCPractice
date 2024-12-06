@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		074666652D02DAB5006C38BC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 074666642D02DAB5006C38BC /* Alamofire */; };
 		07B648EF2D0288AB00339C7A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 07B648EE2D0288AB00339C7A /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07B648EF2D0288AB00339C7A /* SnapKit in Frameworks */,
+				074666652D02DAB5006C38BC /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 			name = WeatherApp_Practice;
 			packageProductDependencies = (
 				07B648EE2D0288AB00339C7A /* SnapKit */,
+				074666642D02DAB5006C38BC /* Alamofire */,
 			);
 			productName = WeatherApp_Practice;
 			productReference = 07B648CD2D02841D00339C7A /* WeatherApp_Practice.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				07B648ED2D0288AB00339C7A /* XCRemoteSwiftPackageReference "SnapKit" */,
+				074666632D02DAB5006C38BC /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 07B648CE2D02841D00339C7A /* Products */;
@@ -352,6 +356,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		074666632D02DAB5006C38BC /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
 		07B648ED2D0288AB00339C7A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -363,6 +375,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		074666642D02DAB5006C38BC /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 074666632D02DAB5006C38BC /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		07B648EE2D0288AB00339C7A /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 07B648ED2D0288AB00339C7A /* XCRemoteSwiftPackageReference "SnapKit" */;

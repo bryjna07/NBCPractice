@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Alamofire
 
 class ViewController: UIViewController {
     
@@ -108,6 +109,14 @@ class ViewController: UIViewController {
             }
         }.resume()
     }
+    
+    // Alamofire 를 사용해서 서버 데이터를 불러오는 메서드
+    private func fetchDateByAlamofire<T: Decodable>(url: URL, completion: @escaping (Result<T, AFError>) -> Void) {
+        AF.request(url).responseDecodable(of: T.self) { response in
+            completion(response.result)
+        }
+    }
+    
     // 서버에서 현재 날씨 데이터를 받아오는 메서드
     private func fetchCurrentWeatherData() {
         var urlComponents = URLComponents(string: "https://api.openweathermap.org/data/2.5/weather")
@@ -118,27 +127,52 @@ class ViewController: UIViewController {
             return
         }
         
-        fetchData(url: url) { [weak self] (result: CurrentWeatherResult?) in
-            guard let self, let result else { return }
-            
-            DispatchQueue.main.async {
-                self.tempLabel.text = "\(Int(result.main.temp))°C"
-                self.tempMinLabel.text = "최소: \(Int(result.main.tempMin))°C"
-                self.tempMaxLabel.text = "최고: \(Int(result.main.tempMax))°C"
-            }
-            
-            guard let imageUrl = URL(string: "https://openweathermap.org/img/wn/\(result.weather[0].icon)@2x.png") else { return }
-            
-            // image를 로드하는 작업은 백그라운드 쓰레드에서 작업
-            if let data = try? Data(contentsOf: imageUrl) {
-                if let image = UIImage(data: data) {
-                    
-                    DispatchQueue.main.async {
-                        self.imageView.image = image
+        fetchDateByAlamofire(url: url) { [weak self] (result: Result<CurrentWeatherResult, AFError>) in
+            guard let self else { return }
+            switch result {
+            case .success(let result):
+                DispatchQueue.main.async {
+                    self.tempLabel.text = "\(Int(result.main.temp))°C"
+                    self.tempMinLabel.text = "최소: \(Int(result.main.tempMin))°C"
+                    self.tempMaxLabel.text = "최고: \(Int(result.main.tempMax))°C"
+                }
+                
+                guard let imageUrl = URL(string: "https://openweathermap.org/img/wn/\(result.weather[0].icon)@2x.png") else { return }
+                
+                // Alamofire 를 사용한 이미지 로드
+                AF.request(imageUrl).responseData { response in
+                    if let data = response.data, let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            self.imageView.image = image
+                        }
                     }
                 }
+            case .failure(let error):
+                print("데이터 로드 실패: \(error)")
             }
         }
+        
+//        fetchData(url: url) { [weak self] (result: CurrentWeatherResult?) in
+//            guard let self, let result else { return }
+//            
+//            DispatchQueue.main.async {
+//                self.tempLabel.text = "\(Int(result.main.temp))°C"
+//                self.tempMinLabel.text = "최소: \(Int(result.main.tempMin))°C"
+//                self.tempMaxLabel.text = "최고: \(Int(result.main.tempMax))°C"
+//            }
+//            
+//            guard let imageUrl = URL(string: "https://openweathermap.org/img/wn/\(result.weather[0].icon)@2x.png") else { return }
+//            
+//            // image를 로드하는 작업은 백그라운드 쓰레드에서 작업
+//            if let data = try? Data(contentsOf: imageUrl) {
+//                if let image = UIImage(data: data) {
+//                    
+//                    DispatchQueue.main.async {
+//                        self.imageView.image = image
+//                    }
+//                }
+//            }
+//        }
     }
     
     // 서버에서 5일간 날씨 예보 데이터를 불러오는 메서드
@@ -151,19 +185,33 @@ class ViewController: UIViewController {
             return
         }
         
-        fetchData(url: url) { [weak self] (result: ForecastWeatherResult?) in
-            guard let self, let result else { return }
-            
-            //콘솔에다가 데이터를 잘 불러왔는지 찍어보기
-            for forecastWeather in result.list {
-                print("\(forecastWeather.main)\n\(forecastWeather.dtTxt)\n\n")
-            }
-            
-            DispatchQueue.main.async {
-                self.datasource = result.list
-                self.tabelView.reloadData()
+        fetchDateByAlamofire(url: url) { [weak self] (result: Result<ForecastWeatherResult, AFError>) in
+            guard let self else { return }
+            switch result {
+            case .success(let result):
+                DispatchQueue.main.async {
+                    self.datasource = result.list
+                    self.tabelView.reloadData()
+                }
+            case .failure(let error):
+                print("데이터 로드 실패: \(error)")
             }
         }
+        
+        
+//        fetchData(url: url) { [weak self] (result: ForecastWeatherResult?) in
+//            guard let self, let result else { return }
+//            
+//            //콘솔에다가 데이터를 잘 불러왔는지 찍어보기
+//            for forecastWeather in result.list {
+//                print("\(forecastWeather.main)\n\(forecastWeather.dtTxt)\n\n")
+//            }
+//            
+//            DispatchQueue.main.async {
+//                self.datasource = result.list
+//                self.tabelView.reloadData()
+//            }
+//        }
     }
     private func configureUI() {
         view.backgroundColor = .black
